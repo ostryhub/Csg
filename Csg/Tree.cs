@@ -51,20 +51,20 @@ namespace Csg
 
 	class Node
 	{
-		public Plane? Plane;
-		public Node? Front;
-		public Node? Back;
+		public Plane Plane;
+		public Node Front;
+		public Node Back;
 		public PolygonTreeNodeList PolygonTreeNodes = new PolygonTreeNodeList ();
-		public readonly Node? Parent;
+		public readonly Node Parent;
 
-		public Node(Node? parent)
+		public Node(Node parent)
 		{
 			Parent = parent;
 		}
 
 		public void Invert()
 		{
-			Queue<Node>? queue = null;
+			Queue<Node> queue = null;
 			Node node = this;
 			while (true)
 			{
@@ -93,7 +93,7 @@ namespace Csg
 		public void ClipPolygons(PolygonTreeNodeList clippolygontreenodes, bool alsoRemoveCoplanarFront)
 		{
 			var args = new Args (node: this, polygonTreeNodes: clippolygontreenodes);
-			Stack<Args>? stack = null;
+			Stack<Args> stack = null;
 
 			while (true)
 			{
@@ -102,8 +102,8 @@ namespace Csg
 
 				if (clippingNode.Plane != null)
 				{
-					PolygonTreeNodeList? backnodes = null;
-					PolygonTreeNodeList? frontnodes = null;
+					PolygonTreeNodeList backnodes = null;
+					PolygonTreeNodeList frontnodes = null;
 					var plane = clippingNode.Plane;
 					var numpolygontreenodes = polygontreenodes.Count;
 					for (var i = 0; i < numpolygontreenodes; i++)
@@ -148,8 +148,8 @@ namespace Csg
 
 		public void ClipTo(Tree clippingTree, bool alsoRemoveCoplanarFront)
 		{
-			Node? node = this;
-			Stack<Node>? stack = null;
+			Node node = this;
+			Stack<Node> stack = null;
 			while (node != null)
 			{
 				if (node.PolygonTreeNodes.Count > 0)
@@ -173,7 +173,7 @@ namespace Csg
 		public void AddPolygonTreeNodes(PolygonTreeNodeList addpolygontreenodes)
 		{
 			var args = new Args (node: this, polygonTreeNodes: addpolygontreenodes);
-			Stack<Args>? stack = null;
+			Stack<Args> stack = null;
 			while (true)
 			{
 				var node = args.Node;
@@ -236,12 +236,12 @@ namespace Csg
 
 	class PolygonTreeNode
 	{
-		PolygonTreeNode? parent;
+		PolygonTreeNode parent;
 		readonly PolygonTreeNodeList children = new PolygonTreeNodeList ();
-		Polygon? polygon;
+		Polygon polygon;
 		bool removed;
 
-		public BoundingBox? BoundingBox => polygon?.BoundingBox;
+		public BoundingBox BoundingBox => polygon?.BoundingBox;
 
 		public void AddPolygons(List<Polygon> polygons)
 		{
@@ -313,11 +313,11 @@ namespace Csg
 			}
 		}
 
-		public void SplitByPlane(Plane plane, ref PolygonTreeNodeList? coplanarfrontnodes, ref PolygonTreeNodeList? coplanarbacknodes, ref PolygonTreeNodeList? frontnodes, ref PolygonTreeNodeList? backnodes)
+		public void SplitByPlane(Plane plane, ref PolygonTreeNodeList coplanarfrontnodes, ref PolygonTreeNodeList coplanarbacknodes, ref PolygonTreeNodeList frontnodes, ref PolygonTreeNodeList backnodes)
 		{
 			if (children.Count > 0)
 			{
-				Queue<PolygonTreeNodeList>? queue = null;
+				Queue<PolygonTreeNodeList> queue = null;
 				var nodes = children;
 				while (true)
 				{
@@ -346,7 +346,7 @@ namespace Csg
 			}
 		}
 
-		void SplitPolygonByPlane(Plane plane, ref PolygonTreeNodeList? coplanarfrontnodes, ref PolygonTreeNodeList? coplanarbacknodes, ref PolygonTreeNodeList? frontnodes, ref PolygonTreeNodeList? backnodes)
+		void SplitPolygonByPlane(Plane plane, ref PolygonTreeNodeList coplanarfrontnodes, ref PolygonTreeNodeList coplanarbacknodes, ref PolygonTreeNodeList frontnodes, ref PolygonTreeNodeList backnodes)
 		{
 			var polygon = this.polygon;
 			if (polygon != null)
@@ -451,8 +451,8 @@ namespace Csg
 
 	class PolygonTreeNodeList
 	{
-		PolygonTreeNode? node0;
-		List<PolygonTreeNode>? nodes;
+		PolygonTreeNode node0;
+		List<PolygonTreeNode> nodes;
 		public int Count => nodes != null ? nodes.Count : (node0 != null ? 1 : 0);
 		public PolygonTreeNodeList (PolygonTreeNode item0)
 		{

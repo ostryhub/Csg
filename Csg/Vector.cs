@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Csg
 {
@@ -126,6 +127,16 @@ namespace Csg
 				return new Vector3D(0, 0, 1);
 			}
 		}
+		
+		public static implicit operator Vector3D(Vector3 v)
+		{
+			return new Vector3D(v.x, v.y, v.z);
+		}
+		public static implicit operator Vector3(Vector3D v)
+		{
+			return new Vector3((float)v.X, (float)v.Y, (float)v.Z);
+		}
+
 	}
 
 	public struct Vector2D : IEquatable<Vector2D>

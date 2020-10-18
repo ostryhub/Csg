@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace Csg
 {
@@ -18,10 +19,10 @@ namespace Csg
 
 		static readonly PolygonShared defaultShared = new PolygonShared(null);
 
-		BoundingSphere? cachedBoundingSphere;
-		BoundingBox? cachedBoundingBox;
+		BoundingSphere cachedBoundingSphere;
+		BoundingBox cachedBoundingBox;
 
-		public Polygon(List<Vertex> vertices, PolygonShared? shared = null, Plane? plane = null)
+		public Polygon(List<Vertex> vertices, PolygonShared shared = null, Plane plane = null)
 		{
 			Vertices = vertices;
 			Shared = shared ?? defaultShared;

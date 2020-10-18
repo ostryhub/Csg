@@ -16,7 +16,7 @@ namespace Csg
 		public const int DefaultResolution2D = 32;
 		public const int DefaultResolution3D = 12;
 
-		BoundingBox? cachedBoundingBox;
+		BoundingBox cachedBoundingBox;
 
 		public Solid ()
 		{
@@ -835,11 +835,11 @@ namespace Csg
 			public Vertex2D topright;
 			public Vertex2D bottomleft;
 			public Vertex2D bottomright;
-			public Line2D? leftline;
+			public Line2D leftline;
 			public bool leftlinecontinues;
-			public Line2D? rightline;
+			public Line2D rightline;
 			public bool rightlinecontinues;
-			public RetesselateOutPolygon? outpolygon;
+			public RetesselateOutPolygon outpolygon;
 		}
 
 		class RetesselateOutPolygon
